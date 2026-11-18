@@ -11,7 +11,9 @@ app.use(express.json());
 
 const PORT = 3000;
 
-const client = createClient();
+const client = createClient({
+  url: process.env.REDIS_URL || "redis://localhost:6379",
+});
 client.on("error", (err) => console.log("Redis Client Error", err));
 
 app.post("/submit", async (req: Request, res: Response) => {
